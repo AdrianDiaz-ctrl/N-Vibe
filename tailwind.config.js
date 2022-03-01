@@ -1,5 +1,3 @@
-const colors = requiere('tailwindcss/colors')
-
 module.exports = {
   content: [
     "./src/**/*{html,js,jsx}",
