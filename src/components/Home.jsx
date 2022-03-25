@@ -1,7 +1,23 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import Axios from "axios"
 import Navbar from '@components/Navbar'
 
-export default function Example() {
+export default function Home() {
+
+  function Datos() {
+    const [postres, setPostres] = useState([])
+   
+    useEffect(() => {
+      fetch("json/postres.json")
+        .then(response => response.json())
+        .then(datos => {
+          setPostres(datos)
+        })
+    }, [])
+   
+    return postres
+  }
+
   return (
   <>
     <Navbar/>
