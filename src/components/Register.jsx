@@ -10,23 +10,24 @@ export default function Register() {
   const [correo, setCorreo] = useState('')
   const [password, setPassword] = useState('')
 
-  const register = () => {
-   Axios.post('http://localhost:3002/register',{
-    nombre: name,
-    edad: edad,
-    ocupacion: ocupacion,
-    correo: correo,
-    password: password
+  const router = useRouter();
 
-   }).then((response) =>{
-     console.log(response)
-   })
+  const register = () => {
+    Axios.post('http://localhost:3002/register',{
+      nombre: name,
+      edad: edad,
+      ocupacion: ocupacion,
+      correo: correo,
+      password: password
+    }).then((response) =>{
+      
+    })
   }
 
   return (
     <>
     <div className="flex ">
-      <form className="w-full max-w-sm" action="/register" method="POST">
+      <form className="w-full max-w-sm" action="Register" method="POST">
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">
