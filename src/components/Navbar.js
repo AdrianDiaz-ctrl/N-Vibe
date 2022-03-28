@@ -1,6 +1,16 @@
 import { Popover, Transition } from '@headlessui/react'
+import Axios from "axios"
 
 export default function Navbar() {
+
+  function Datos(){   
+    Axios.get("http://localhost:3002/getData", {
+      params: {ocupacion: "otros"}
+    }).then(response => {
+      console.log(response.data)
+    }).catch(e => {console.error(e)})
+  }
+
   return (
     <Popover className="relative bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -21,7 +31,6 @@ export default function Navbar() {
 
               <div className="flex justify-between md:flex items-center md:flex-1 lg:w-0">
                   <button className="bg-transparent hover:bg-orange-700 text-orange-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                    onClick = {}
                   >
                     Cerrajeros
                   </button>
@@ -34,7 +43,9 @@ export default function Navbar() {
                     Carpinteros
                   </button>
 
-                  <button className="bg-transparent hover:bg-violet-500 text-violet-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                  <button className="bg-transparent hover:bg-violet-500 text-violet-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                    onClick={Datos}
+                  >
                     Otros
                   </button>
               </div>

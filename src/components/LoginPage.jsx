@@ -1,28 +1,44 @@
-import React, { useState } from "react";
-import {useRouter} from "next/router"
+import React, { useState, useEffect } from "react";
+import { useApi }from "../api/useApi"
 import Axios from "axios"
 
 export default function Login(){
-    
-    const router = useRouter()
 
     const [correo, setCorreo] = useState('')
     const [password, setPassword] = useState('')
 
+    useEffect(() => {
+        Log()
+    }, [])
+    
     const Log = () => {
-        Axios.post('http://localhost:3002/login',{
-         correo: correo,
-         password: password
-     
-        }).then(function (response){
+         useApi.post('http://localhost:3002/login', {
+            correo: correo,
+            password: password
+        }).then(response => {
             if(response.data.redirect == "/home"){
                 window.location = "/home"
-            }else if(response.data.redirect == "/register"){
-                window.location = "/register"
+            }else{
+                window.location = "/loginS"
             }
-          console.log(response)
+            console.log(response.data)
         })
     }
+
+        // const Log = () => {
+        //     Axios.post('http://localhost:3002/login',{
+        //     correo: correo,
+        //     password: password
+        
+        //     }).then(function (response){
+        //         if(response.data.redirect == "/home"){
+        //             window.location = "/home"
+        //         }else if(response.data.redirect == "/register"){
+        //             window.location = "/register"
+        //         }
+        //     console.log(response)
+        //     })
+        // }
 
   return (
       <>
@@ -38,11 +54,11 @@ export default function Login(){
                     d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
             </svg> */}
         </div>
-        <h3 className="text-2xl font-bold text-center">Login to your account</h3>
+        <h3 className="text-2xl font-bold text-center">Login</h3>
         <form action="" >
             <div className="mt-4">
                 <div>
-                    <label className="block" >Email</label>
+                    <label className="block" >E-mail</label>
                             <input className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" 
                                   id="correo"
                                   type="email"
@@ -53,7 +69,7 @@ export default function Login(){
                             {/* <span className="text-xs tracking-wide text-red-600">Email field is required </span> */}
                 </div>
                 <div className="mt-4">
-                    <label className="block">Password</label>
+                    <label className="block">Contraseña</label>
                             <input className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600" 
                               id="pass"
                               type="password"              
@@ -65,7 +81,7 @@ export default function Login(){
                 <div className="flex items-baseline justify-between">
                     <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900"
                         type="submit"
-                        onClick={Log}
+                        onClick={() => Log()}
                     >
                         Login
                     </button>

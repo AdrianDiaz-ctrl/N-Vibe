@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+import { useApi } from "../api/useApi";
 import Axios from "axios"
 
 export default function Register() {
@@ -9,6 +9,11 @@ export default function Register() {
   const [ocupacion, setOcupacion] = useState('')
   const [correo, setCorreo] = useState('')
   const [password, setPassword] = useState('')
+
+  // useEffect(() => {
+  //   register()
+  // }, [])
+  
 
   const register = () => {
    Axios.post('http://localhost:3002/register',{
@@ -88,10 +93,10 @@ export default function Register() {
               value={ocupacion} name="ocupaciones" id="ocupacion" onChange={(e) =>{setOcupacion(e.target.value);}}
             
             >
-              <option value="Carpintero">Carpintero</option>
-              <option value="Cerrajero">Cerrajero</option>
-              <option value="Plomero">Plomero</option>
-              <option value="Otro">Otro</option>
+              <option value="carpintero">Carpintero</option>
+              <option value="cerrajero">Cerrajero</option>
+              <option value="plomero">Plomero</option>
+              <option value="otro">Otro</option>
             </select>
           </div>
         </div>
